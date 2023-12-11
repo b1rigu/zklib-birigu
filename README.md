@@ -1,9 +1,9 @@
-# Zklib-js
+# Zklib-birigu
 
 - install 
 
 ```
-npm i zklib-js
+npm i zklib-birigu
 ```
 
 - Documentation
@@ -13,7 +13,7 @@ npm i zklib-js
 //  test code:
 
 
-    const ZKLib = require('node-zklib')
+    const ZKLib = require('zklib-birigu')
     const test = async () => {
     let zkInstance = new ZKLib('192.168.1.201', 4370, 5200, 5000);
     try {
@@ -166,3 +166,4 @@ The function executeCmd accepts the command constant in `constants.js` and the d
 
 * [php_zklib](https://github.com/dnaextrim/php_zklib)
 * [node-zklib](https://github.com/caobo171/node-zklib)
+* [zklib-js](https://github.com/merouanezouaid/zklib-js)
