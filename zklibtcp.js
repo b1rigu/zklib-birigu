@@ -262,6 +262,7 @@ class ZKLibTCP {
 
           let totalBuffer = Buffer.from([])
           let realTotalBuffer = Buffer.from([])
+          let isDataOnGoing = false
 
 
           const timeout = 10000
@@ -279,7 +280,6 @@ class ZKLibTCP {
 
 
           const handleOnData = (reply) => {
-
             if (checkNotEventTCP(reply)) return;
             clearTimeout(timer)
             timer = setTimeout(() => {
@@ -302,6 +302,7 @@ class ZKLibTCP {
                 realTotalBuffer = Buffer.from([])
 
                 totalPackets -= 1
+                isDataOnGoing = false
                 cb && cb(replyData.length, size)
 
                 if (totalPackets <= 0) {
@@ -322,6 +323,10 @@ class ZKLibTCP {
               this.sendChunkRequest(numberChunks * MAX_CHUNK, remain)
             } else {
               this.sendChunkRequest(i * MAX_CHUNK, MAX_CHUNK)
+            }
+            isDataOnGoing = true
+            while (isDataOnGoing) {
+              await new Promise(r => setTimeout(r, 100))
             }
           }
 
